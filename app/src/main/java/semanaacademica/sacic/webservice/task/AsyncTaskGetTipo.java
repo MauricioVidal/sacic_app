@@ -2,6 +2,7 @@ package semanaacademica.sacic.webservice.task;
 
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import semanaacademica.sacic.model.Tipo;

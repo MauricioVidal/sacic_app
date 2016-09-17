@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="2dp">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
         android:id="@+id/container"
-        android:background="#a3afaeae"
-        android:layout_margin="5dp"
         android:padding="10dp"
-        android:weightSum="2">
+        android:background="#a3afaeae">
 
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:id="@+id/imgTipo"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp" />
+            android:layout_gravity="center" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -32,23 +29,12 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Large Text"
-                android:singleLine="true"
                 android:id="@+id/titulo"
                 android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#000000" />
+                android:gravity="center_horizontal" />
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Participar"
-                android:id="@+id/checkParticipa"
-                android:layout_gravity="center_horizontal"
-                android:checked="false"
-                android:textSize="15sp" />
         </LinearLayout>
 
     </LinearLayout>

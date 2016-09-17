@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,14 +8,21 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="semanaacademica.sacic.Splash"
-    android:background="@drawable/splash">
+    android:orientation="vertical"
+    android:weightSum="2">
 
-    <ProgressBar
-        style="?android:attr/progressBarStyleLarge"
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="2" />
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:indeterminate="true" />
-</RelativeLayout>
+        android:text="New Button"
+        android:id="@+id/button"
+        android:layout_gravity="right" />
+</LinearLayout>

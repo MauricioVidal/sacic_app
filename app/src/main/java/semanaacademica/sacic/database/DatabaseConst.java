@@ -34,7 +34,8 @@ public class DatabaseConst {
 
             "CREATE TABLE tipo (\n" +
                     "id  INTEGER PRIMARY KEY,\n" +
-                    "descricao  TEXT(200) NOT NULL\n" +
+                    "descricao  TEXT(200) NOT NULL," +
+                    "color TEXT(200)\n" +
                     ");",
     };
 

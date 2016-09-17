@@ -3,11 +3,16 @@ package semanaacademica.sacic.activity;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +34,7 @@ public class ActivityAtividade extends Activity{
     private DatabaseDia databaseDia;
     private DatabaseAtividade databaseAtividade;
     private List<List<Atividade>> atividades = new ArrayList();
+    private DisplayMetrics metrics = new DisplayMetrics();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,12 @@ public class ActivityAtividade extends Activity{
         databaseAtividade = new DatabaseAtividade(this);
 
         TabHost host  = (TabHost) findViewById(R.id.tabHost);
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        ImageView cabecalho = (ImageView) findViewById(R.id.cabecalho);
+        cabecalho.getLayoutParams().height = (int) (metrics.heightPixels * 0.2);
+        cabecalho.requestLayout();
+
         host.setup();
         Evento evento = databaseEvento.getEvento();
         if(evento == null) return;
@@ -50,7 +62,7 @@ public class ActivityAtividade extends Activity{
                 @Override
                 public View createTabContent(String tag) {
                     ListView list = new ListView(ActivityAtividade.this);
-                    ArrayAdapter adapter = carregarAtividades(dia.getId());
+                    final AdapterAtividade adapter = carregarAtividades(dia.getId());
                     list.setAdapter(adapter);
                     return list;
                 }
@@ -64,18 +76,18 @@ public class ActivityAtividade extends Activity{
         for(List<Atividade> list : atividades){
             databaseAtividade.salvar(list);
         }
-        ButtonClickDialog ok = new ButtonClickDialog() {
+        Toast.makeText(getApplicationContext(), "Salvo com Sucesso!", Toast.LENGTH_LONG).show();
+        /*ButtonClickDialog ok = new ButtonClickDialog() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 finish();
             }
-        };
-        DialogFragment dialog = new AvisoDialog().createDialog("Sucesso", "Dados salvo com sucesso!", ok);
-        //dialog.show(getSupportFragmentManager(), "Suceso");
+        };*/
+        //DialogFragment dialog = new AvisoDialog().createDialog("Sucesso", "Dados salvo com sucesso!", ok);
     }
 
 
-    private ArrayAdapter carregarAtividades(long idDia){
+    private AdapterAtividade carregarAtividades(long idDia){
         List<Atividade> lista = databaseAtividade.getAtividades(idDia);
         AdapterAtividade adapter = new AdapterAtividade(this);
         atividades.add(lista);

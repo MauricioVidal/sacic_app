@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import semanaacademica.sacic.model.Tipo;
@@ -74,6 +75,23 @@ public class DatabaseTipo {
             return t;
         }
         return null;
+    }
+
+    public List<Tipo> getTipos() {
+        Cursor c = db.query(NAME_TABLE, COLUMS, null, null, null,null, null);
+        List<Tipo> list = new ArrayList();
+        if (c.moveToFirst()) {
+            int id_index = c.getColumnIndex(COLUMS[0]);
+            int descricao_index = c.getColumnIndex(COLUMS[1]);
+            while(c.moveToNext()) {
+                Tipo t = new Tipo();
+                t.setId(c.getInt(id_index));
+                t.setDescricao(c.getString(descricao_index));
+                list.add(t);
+            }
+            return list;
+        }
+        return list;
     }
 
 

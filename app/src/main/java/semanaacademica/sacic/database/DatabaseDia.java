@@ -46,6 +46,7 @@ public class DatabaseDia {
     public boolean salvar(List<Dia> list){
         boolean rs = true;
         for(Dia d : list) {
+            if (update(d))continue;
             ContentValues values = new ContentValues();
             values.put(COLUMS[0], d.getId());
             values.put(COLUMS[1], d.getDiasemana());
@@ -53,6 +54,14 @@ public class DatabaseDia {
             rs &= db.insert(NAME_TABLE, null, values) == 1;
         }
         return rs;
+    }
+
+    private boolean update(Dia d){
+        ContentValues values = new ContentValues();
+        values.put(COLUMS[0], d.getId());
+        values.put(COLUMS[1], d.getDiasemana());
+        values.put(COLUMS[2], d.getIdevento());
+        return db.update(NAME_TABLE, values, "id = " + d.getId(), null) == 1;
     }
 
     public List<Dia> getDias(int idEvento) {

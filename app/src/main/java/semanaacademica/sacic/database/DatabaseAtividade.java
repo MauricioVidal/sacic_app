@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,14 +56,14 @@ public class DatabaseAtividade {
         for(Atividade a : list) {
             if(atualizar(a)) continue;
             ContentValues values = new ContentValues();
-            values.put(COLUMS[0], a.getId());
-            values.put(COLUMS[1], a.getNome());
-            values.put(COLUMS[2], a.getHorario());
-            values.put(COLUMS[3], a.getDuracao());
-            values.put(COLUMS[4], a.getInfo());
-            values.put(COLUMS[5], a.getIddia());
-            values.put(COLUMS[6], a.getIdtipo());
-            values.put(COLUMS[7], a.getParticipar());
+                values.put(COLUMS[0], a.getId());
+                values.put(COLUMS[1], a.getNome());
+                values.put(COLUMS[2], a.getHorario());
+                values.put(COLUMS[3], a.getDuracao());
+                values.put(COLUMS[4], a.getInfo());
+                values.put(COLUMS[5], a.getIddia());
+                values.put(COLUMS[6], a.getIdtipo());
+                values.put(COLUMS[7], a.getParticipar());
             long resultado = db.insert(NAME_TABLE, null, values);
             rs &= resultado != 0;
             System.out.println("DEBUG: "+ rs);

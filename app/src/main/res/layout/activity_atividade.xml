@@ -4,81 +4,85 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="semanaacademica.sacic.Splash"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#005c81">
 
-    <TabHost
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/tabHost"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true">
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:weightSum="2">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cabecalho"
+            android:src="@drawable/cabecalho"
+            android:scaleType="fitXY"
+            android:layout_weight="0.4"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TabHost
+            android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:weightSum="3">
-
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/imageView"
-                android:src="@drawable/cabecalho"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:scaleType="fitStart"
-                android:layout_weight="2.0" />
-
-            <TabWidget
-                android:id="@android:id/tabs"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"></TabWidget>
-
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-            </FrameLayout>
+            android:id="@+id/tabHost"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/cabecalho"
+            android:layout_above="@+id/linearLayout"
+            android:layout_weight="1.6">
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="3"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="4" >
 
-                <CheckBox
-                    android:layout_width="wrap_content"
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Me lembre dos eventos"
-                    android:id="@+id/checkBox"
-                    android:layout_gravity="center"
-                    android:textSize="18sp"
-                    android:checked="false"
-                    android:layout_weight="0.75" />
+                    android:layout_weight="0"
+                    android:background="#ffffff" />
 
-                <Space
-                    android:layout_width="wrap_content"
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="fill_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.5" />
+                    android:layout_weight="3.1" />
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Salvar"
-                    android:id="@+id/button4"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.75"
-                    android:onClick="salvar" />
             </LinearLayout>
+        </TabHost>
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:background="#70ffffff"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/linearLayout"
+            android:layout_weight="0">
+
+            <Space
+                android:layout_width="20px"
+                android:layout_height="20px"
+                android:layout_weight="2" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Salvar"
+                android:id="@+id/button4"
+                android:onClick="salvar" />
         </LinearLayout>
-    </TabHost>
+
+    </LinearLayout>
 
 
 </RelativeLayout>

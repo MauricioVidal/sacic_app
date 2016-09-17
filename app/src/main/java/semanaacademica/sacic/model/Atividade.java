@@ -1,9 +1,11 @@
 package semanaacademica.sacic.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Mauricio on 23/07/2016.
  */
-public class Atividade {
+public class Atividade implements Serializable {
     private int id;
     private String nome;
     private String horario;

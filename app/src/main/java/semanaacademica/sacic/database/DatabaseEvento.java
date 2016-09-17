@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 import semanaacademica.sacic.model.Evento;
@@ -52,7 +53,17 @@ public class DatabaseEvento {
         return rs;
     }
 
+    private boolean update(Evento e){
+        ContentValues values = new ContentValues();
+        values.put(COLUMS[0], e.getId());
+        values.put(COLUMS[1], e.getTitulo());
+        values.put(COLUMS[2], e.getDescricao());
+        values.put(COLUMS[3], e.getDatasinc());
+        return db.update(NAME_TABLE, values, "id = "+ e.getId(), null) == 1;
+    }
+
     public boolean salvar(Evento e){
+        if(update(e)) return true;
         ContentValues values = new ContentValues();
         values.put(COLUMS[0], e.getId());
         values.put(COLUMS[1], e.getTitulo());

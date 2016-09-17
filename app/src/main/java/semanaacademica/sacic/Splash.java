@@ -16,6 +16,7 @@ import semanaacademica.sacic.model.Atividade;
 import semanaacademica.sacic.model.Dia;
 import semanaacademica.sacic.model.Evento;
 import semanaacademica.sacic.model.Tipo;
+import semanaacademica.sacic.util.Notification;
 import semanaacademica.sacic.webservice.WS_SACIC;
 
 public class Splash extends Activity implements Runnable{
@@ -59,12 +60,8 @@ public class Splash extends Activity implements Runnable{
             }
             dbEvento.salvar(eventos);
         }
-        try {
-            Thread.sleep(1000*5);
-        } catch (InterruptedException e1) {
-            e1.printStackTrace();
-        }
-        Intent it = new Intent(Splash.this, ActivityPrincipal.class);
+        Notification.notificar(this);
+        Intent it = new Intent(Splash.this, ActivityAtividade.class);
         startActivity(it);
         finish();
     }

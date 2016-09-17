@@ -2,6 +2,7 @@ package semanaacademica.sacic.webservice.task;
 
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import semanaacademica.sacic.model.Atividade;
@@ -16,7 +17,7 @@ public class AsyncTaskGetAtividades extends Task<Object, Void, List<Atividade>>{
     protected List<Atividade> doInBackground(Object... params) {
         try {
             Http http = (Http) params[0];
-            String json = http.solicitar();
+            String json = new String(http.solicitar().getBytes(), "UTF-8");
             return GSON.fromJson(json, new TypeToken<List<Atividade>>(){}.getType());
         } catch (IOException e) {
             e.printStackTrace();

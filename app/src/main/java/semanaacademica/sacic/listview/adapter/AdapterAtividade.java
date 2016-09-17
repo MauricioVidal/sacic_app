@@ -1,7 +1,10 @@
 package semanaacademica.sacic.listview.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import semanaacademica.sacic.R;
+import semanaacademica.sacic.activity.ActivityDescricaoAtividade;
 import semanaacademica.sacic.database.DatabaseTipo;
 import semanaacademica.sacic.model.Atividade;
 import semanaacademica.sacic.model.Tipo;
@@ -24,12 +28,16 @@ public class AdapterAtividade extends ArrayAdapter<Atividade> {
     private LayoutInflater mInflater;
     private int resource;
     private DatabaseTipo databaseTipo;
+    private DisplayMetrics metrics = new DisplayMetrics();
+    private Activity activity;
 
-    public AdapterAtividade(Context context) {
-        super(context, R.layout.item_atividade);
-        mInflater = LayoutInflater.from(context);
+    public AdapterAtividade(Activity activity) {
+        super(activity.getApplicationContext(), R.layout.item_atividade);
+        mInflater = LayoutInflater.from(activity.getApplicationContext());
         resource = R.layout.item_atividade;
-        databaseTipo = new DatabaseTipo(context);
+        databaseTipo = new DatabaseTipo(activity.getApplicationContext());
+        this.activity = activity;
+        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
     }
 
     @Override
@@ -44,9 +52,33 @@ public class AdapterAtividade extends ArrayAdapter<Atividade> {
         TextView titulo = (TextView) convertView.findViewById(R.id.titulo);
         ImageView image = (ImageView) convertView.findViewById(R.id.imgTipo);
         CheckBox check = (CheckBox) convertView.findViewById(R.id.checkParticipa);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getContext(), ActivityDescricaoAtividade.class);
+                it.putExtra("atividade", a);
+                activity.startActivity(it);
+            }
+        });
+        if(t.getId() == 1){
+            image.setImageResource(R.drawable.minicurso);
+        }else if(t.getId() == 2){
+            image.setImageResource(R.drawable.palestra);
+        }else if(t.getId() == 3){
+            image.setImageResource(R.drawable.mesaredonda);
 
-        //image.setImageResource(convertView.getResources().getIdentifier(t.getImagem(), "drawable", getContext().getPackageName()));
-        //container.setBackgroundColor(Color.parseColor(t.getColor()));
+        }else if(t.getId() == 4){
+            image.setImageResource(R.drawable.mostra);
+        }else if(t.getId() == 5){
+            image.setImageResource(R.drawable.oficina);
+        }else if(t.getId() == 6){
+            image.setImageResource(R.drawable.competicao);
+        }
+        image.getLayoutParams().height = (int) (metrics.widthPixels *0.15);
+        image.getLayoutParams().width = (int) (metrics.widthPixels *0.15);
+        image.requestLayout();
+        String color = t.getColor() == null? "#69D2E7" : t.getColor();
+        container.setBackgroundColor(Color.parseColor(color));
         check.setChecked(a.getParticipar() == 1);
         titulo.setText(a.getNome());
 

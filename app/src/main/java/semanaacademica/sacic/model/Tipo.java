@@ -6,6 +6,7 @@ package semanaacademica.sacic.model;
 public class Tipo {
     private int id;
     private String descricao;
+    private String color;
 
     public int getId() {
         return id;
@@ -21,5 +22,13 @@ public class Tipo {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }
