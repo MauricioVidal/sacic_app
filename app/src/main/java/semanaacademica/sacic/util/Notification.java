@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,9 +17,10 @@ import java.util.List;
 
 import semanaacademica.sacic.R;
 import semanaacademica.sacic.Splash;
-import semanaacademica.sacic.activity.ActivityPrincipal;
 import semanaacademica.sacic.database.DatabaseAtividade;
+import semanaacademica.sacic.database.DatabaseEvento;
 import semanaacademica.sacic.model.Atividade;
+import semanaacademica.sacic.model.Evento;
 
 
 /**
@@ -29,25 +29,26 @@ import semanaacademica.sacic.model.Atividade;
 public class Notification {
 
     private static DatabaseAtividade database;
+    private static DatabaseEvento databaseEvento;
     private static final int ID = 2341234;
 
     public static void notificar(Activity activity){
         Context context = activity.getApplicationContext();
         database =  new DatabaseAtividade(context);
-        Toast.makeText(context, "Passei aki", Toast.LENGTH_LONG).show();
+        databaseEvento = new DatabaseEvento(context);
         long iddia = Long.parseLong(new SimpleDateFormat("dd/MM/yyyy").format(new Date()).replace("/",""));
-        Toast.makeText(context, iddia+"", Toast.LENGTH_LONG).show();
         List<Atividade> atividades = database.getAtividades(iddia);
-        if(atividades.isEmpty()){
+        if(!atividades.isEmpty()){
             for(Atividade a :atividades){
                 if(a.getParticipar() == 1){
+                    Evento e = databaseEvento.getEvento();
                     TaskStackBuilder stack = TaskStackBuilder.create(context);
                     Intent it  = new Intent(context, Splash.class);
                     stack.addNextIntent(it);
                     NotificationCompat.Builder  builder = new NotificationCompat.Builder(context)
                             .setSmallIcon(R.drawable.icone)
-                            .setContentTitle("Aviso")
-                            .setContentText("Você possui atividades nesse dia!")
+                            .setContentTitle(e.getTitulo())
+                            .setContentText("Há atividades agendas para hoje!")
                             .setColor(Color.parseColor("#d0e087"))
                             .setAutoCancel(true);
                     PendingIntent pi = stack.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);

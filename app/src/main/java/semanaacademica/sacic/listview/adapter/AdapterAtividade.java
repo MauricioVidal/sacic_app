@@ -1,13 +1,15 @@
 package semanaacademica.sacic.listview.adapter;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -16,8 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import semanaacademica.sacic.R;
-import semanaacademica.sacic.activity.ActivityDescricaoAtividade;
 import semanaacademica.sacic.database.DatabaseTipo;
+import semanaacademica.sacic.dialog.DialogDescricaoAtividade;
 import semanaacademica.sacic.model.Atividade;
 import semanaacademica.sacic.model.Tipo;
 
@@ -30,14 +32,16 @@ public class AdapterAtividade extends ArrayAdapter<Atividade> {
     private DatabaseTipo databaseTipo;
     private DisplayMetrics metrics = new DisplayMetrics();
     private Activity activity;
+    private Animation animAlpha;
 
     public AdapterAtividade(Activity activity) {
         super(activity.getApplicationContext(), R.layout.item_atividade);
         mInflater = LayoutInflater.from(activity.getApplicationContext());
         resource = R.layout.item_atividade;
-        databaseTipo = new DatabaseTipo(activity.getApplicationContext());
         this.activity = activity;
-        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        animAlpha = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha);
+        databaseTipo = new DatabaseTipo(activity.getApplicationContext());
+        this.activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
     }
 
     @Override
@@ -55,9 +59,9 @@ public class AdapterAtividade extends ArrayAdapter<Atividade> {
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(getContext(), ActivityDescricaoAtividade.class);
-                it.putExtra("atividade", a);
-                activity.startActivity(it);
+                v.startAnimation(animAlpha);
+                Dialog dialog = new DialogDescricaoAtividade(activity, a);
+                dialog.show();
             }
         });
         if(t.getId() == 1){

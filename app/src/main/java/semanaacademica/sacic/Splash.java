@@ -7,7 +7,6 @@ import android.os.Bundle;
 import java.util.List;
 
 import semanaacademica.sacic.activity.ActivityAtividade;
-import semanaacademica.sacic.activity.ActivityPrincipal;
 import semanaacademica.sacic.database.DatabaseAtividade;
 import semanaacademica.sacic.database.DatabaseDia;
 import semanaacademica.sacic.database.DatabaseEvento;

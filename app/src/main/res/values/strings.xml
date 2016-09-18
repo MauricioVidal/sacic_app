@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">SACIC</string>
     <string name="splash">splash01.png</string>
+    <string name="content_desenvolvedor">
+        \t Aplicativo desenvolvido por Maurício Roque Vidal, especialmente para a Semana Acadêmica da Computação
+        da Universidade Federal de Alfenas - MG.
+    </string>
 </resources>

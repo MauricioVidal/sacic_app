@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:weightSum="2">
+        android:weightSum="1">
 
         <ImageView
             android:layout_width="fill_parent"
@@ -21,19 +21,19 @@
             android:id="@+id/cabecalho"
             android:src="@drawable/cabecalho"
             android:scaleType="fitXY"
-            android:layout_weight="0.4"
+            android:layout_weight="0"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <TabHost
             android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/tabHost"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/cabecalho"
             android:layout_above="@+id/linearLayout"
-            android:layout_weight="1.6">
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -51,8 +51,7 @@
                 <FrameLayout
                     android:id="@android:id/tabcontent"
                     android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3.1" />
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
         </TabHost>
@@ -61,25 +60,58 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:weightSum="2"
             android:background="#70ffffff"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:id="@+id/linearLayout"
-            android:layout_weight="0">
+            android:padding="3dp"
+            android:weightSum="4">
 
             <Space
-                android:layout_width="20px"
-                android:layout_height="20px"
-                android:layout_weight="2" />
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
 
-            <Button
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Salvar"
-                android:id="@+id/button4"
-                android:onClick="salvar" />
+                android:id="@+id/btndesen"
+                android:onClick="sobreDesenvolvedor"
+                android:background="@drawable/desenvolvedor"
+                android:scaleType="fitXY" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/btninfo"
+                android:onClick="sobreEvento"
+                android:background="@drawable/info"
+                android:scaleType="fitXY" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/btnsave"
+                android:onClick="salvar"
+                android:background="@drawable/save"
+                android:scaleType="fitXY" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
         </LinearLayout>
 
     </LinearLayout>
